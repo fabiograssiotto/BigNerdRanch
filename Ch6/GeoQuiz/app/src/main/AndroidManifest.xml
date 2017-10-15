@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CheatActivity">
+            android:name=".CheatActivity"
+            android:label="@string/title_activity_cheat" >
         </activity>
     </application>
 
