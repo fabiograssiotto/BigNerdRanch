@@ -10,8 +10,10 @@ import android.widget.TextView;
 public class CheatActivity extends AppCompatActivity {
     private static final String EXTRA_ANSWER_IS_TRUE = "com.bignerdranch.android.geoquiz.answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = "com.bignerdranch.android.geoquiz.answer_is_shown";
+    private static final String KEY_CHEATED = "cheated";
 
     private boolean mAnswerIsTrue;
+    private boolean mIsCheater;
     private TextView mAnswerTextView;
     private Button mShowAnswer;
 
@@ -23,6 +25,7 @@ public class CheatActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, resultShown);
         setResult(RESULT_OK, data);
+        mIsCheater = true;
     }
 
     @Override
@@ -30,6 +33,10 @@ public class CheatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
 
+        if (savedInstanceState != null) {
+            // Restore data
+            setAnswerShownResult(savedInstanceState.getBoolean(KEY_CHEATED, false));
+        }
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
         mAnswerTextView = (TextView) findViewById(R.id.answerTextView);
@@ -45,5 +52,11 @@ public class CheatActivity extends AppCompatActivity {
                 setAnswerShownResult(true);
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean(KEY_CHEATED, mIsCheater);
     }
 }
