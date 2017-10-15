@@ -16,6 +16,7 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+    private static final String KEY_CHEATED = "cheated";
     private static final String EXTRA_ANSWER_IS_TRUE = "com.bignerdranch.android.geoquiz.answer_is_true";
     private static final int REQUEST_CODE_CHEAT = 0;
 
@@ -62,8 +63,9 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "OnCreate(Bundle) called");
 
         if (savedInstanceState != null) {
-            // Restore index
+            // Restore data
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            mIsCheater = savedInstanceState.getBoolean(KEY_CHEATED, false);
         }
 
         setContentView(R.layout.activity_quiz);
@@ -144,6 +146,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "OnSaveInstanceState called");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putBoolean(KEY_CHEATED, mIsCheater);
     }
 
     @Override
