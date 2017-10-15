@@ -7,10 +7,12 @@ package com.bignerdranch.android.geoquiz;
 public class Question {
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean mCheated;
 
-    public Question(int textResIdId, boolean answerTrue) {
+    public Question(int textResIdId, boolean answerTrue, boolean cheated) {
         mTextResId = textResIdId;
         mAnswerTrue = answerTrue;
+        mCheated = cheated;
     }
 
     public int getTextResId() {
@@ -27,5 +29,13 @@ public class Question {
 
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
+    }
+
+    public void setCheated(boolean cheated) {
+        mCheated = cheated;
+    }
+
+    public boolean isCheated() {
+        return mCheated;
     }
 }
